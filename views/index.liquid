@@ -2,9 +2,11 @@
 
 <h2>Students</h2>
 <ul>
-  {% for person in persons %}
-    <li><a href="/student/{{ person.id }}">{{ person.name }}</a></li>
-  {% endfor %}
+ 
+    {% for person in persons %}
+      <a href="https://squadpage-sprint-7.onrender.com/kleur">, <img src=" {{ person.avatar }}" width="200px" height="200px"></a>
+     {% endfor %}
+
 </ul>
 
 {% render 'partials/foot.liquid', squads: squads %}
