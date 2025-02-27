@@ -1,6 +1,6 @@
 // Importeer het npm package Express (uit de door npm aangemaakte node_modules map)
 // Deze package is geïnstalleerd via `npm install`, en staat als 'dependency' in package.json
-import express from 'express'
+import express, { response } from 'express'
 
 // Importeer de Liquid package (ook als dependency via npm geïnstalleerd)
 import { Liquid } from 'liquidjs';
@@ -60,10 +60,11 @@ app.get('/', async function (request, response) {
 })
 
 // Maak een POST route voor de index; hiermee kun je bijvoorbeeld formulieren afvangen
-app.post('/', async function (request, response) {
+app.post('/berichten', async function (request, response) {
   // Je zou hier data kunnen opslaan, of veranderen, of wat je maar wilt
   // Er is nog geen afhandeling van POST, redirect naar GET op /
-  response.redirect(303, '/')
+  messages.push(request.body.message)
+  response.redirect(303, '/berichten')
 })
 
 
@@ -89,3 +90,9 @@ app.listen(app.get('port'), function () {
   // Toon een bericht in de console en geef het poortnummer door
   console.log(`Application started on http://localhost:${app.get('port')}`)
 })
+
+let messages = []
+
+app.get('/berichten', async function (request, response){
+  response.render('messages.liquid', {messages: messages})})
+
